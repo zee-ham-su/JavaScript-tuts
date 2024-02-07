@@ -64,4 +64,18 @@ app.post('/books', (req, res) => {
         })
 
 })
-    
+
+app.delete('/books/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('books')
+        .deleteOne({ _id: new ObjectId(req.params.id)})
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Could not delete the document' });
+        });
+    } else {
+        res.status(400).json({ error: 'Invalid ID' });
+    }
+});
