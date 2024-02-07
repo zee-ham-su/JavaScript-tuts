@@ -79,3 +79,20 @@ app.delete('/books/:id', (req, res) => {
         res.status(400).json({ error: 'Invalid ID' });
     }
 });
+
+app.patch('/books/:id', (req, res) => {
+    const updates = req.body
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('books')
+        .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Could not update the document' });
+        });
+    } else {
+        res.status(400).json({ error: 'Invalid ID' });
+    }
+
+})
