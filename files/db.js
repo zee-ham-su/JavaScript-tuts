@@ -1,10 +1,11 @@
 const { MongoClient } = require('mongodb');
 let dbConnection;
-
+let url = 'mongodb+srv://hamzasufian2014:1MZQ7KE5Z7djgmGb@cluster0.ovpb1oc.mongodb.net/?retryWrites=true&w=majority'
 // database init connection
+
 module.exports = {
     connectToDb: (cb) => {
-        MongoClient.connect('mongodb://localhost:27017/bookstore')
+        MongoClient.connect(url)
         .then((client) => {
             dbConnection = client.db()
             return cb()
