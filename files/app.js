@@ -20,11 +20,12 @@ connectToDb((err) => {
 })
 // Create a GET route
 app.get('/books', (req, res) => {
-    const page = req.query.page || 0 // get the page number from the query string or use 0 if it's not provided
+    const page = req.query.p || 0 // get the page number from the query string or use 0 if it's not provided
     const booksPerPage = 3 // number of books to show per page
 
     // find all books in the database
     let books = [];
+    
     db.collection('books')
         .find() // find all books
         .sort({ author: 1 }) // sort by author name
