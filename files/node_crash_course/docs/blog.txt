@@ -1,10 +1,1 @@
-Welcome to my blog!
-
-In this blog, I will be sharing my thoughts and experiences on various topics such as technology, programming, and personal development. I hope you find the content informative and engaging.
-
-Stay tuned for regular updates and feel free to leave comments or reach out to me with any questions or suggestions.
-
-Happy reading!
-
-Best regards,
-[Hamza Sufian]
+hello, world
