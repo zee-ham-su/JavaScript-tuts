@@ -4,8 +4,7 @@
   "description": "trying my hands on express.js framework",
   "main": "server.js",
   "scripts": {
-    "start:dev": "nodemon ./src/server.js",
-    "start": "npm start",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sufian Hamza",
