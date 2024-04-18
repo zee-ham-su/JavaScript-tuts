@@ -1,0 +1,14 @@
+{
+  "name": "express-tut",
+  "version": "1.0.0",
+  "description": "trying my hands on express.js framework",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sufian Hamza",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
