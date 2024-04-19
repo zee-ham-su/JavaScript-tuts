@@ -35,6 +35,13 @@ app.get('/api/users', (req, res) => {
 
 });
 
+
+app.post('/api/users', (req, res) => {
+  console.log(req.body);
+  res.send({msg: 'User created successfully!'});
+});
+
+
 app.get("/api/products", (req, res) => {
   res.send([
     { id: 1, name: 'phone', price: 1000.00 },
