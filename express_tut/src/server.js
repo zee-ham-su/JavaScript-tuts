@@ -8,6 +8,12 @@ const dummyData = [
     { id: 2, username: 'Jane Doe', displayName: 'Jane D'},
     { id: 3, username: 'John Smith', displayName: 'John S'},
     { id: 4, username: 'Jane Smith', displayName: 'Jane S'},
+    { id: 5, username: 'Sufian Hamza', displayName: 'Sufian H'},
+    { id: 6, username: 'Kobe Bryant', displayName: 'Kobe B'},
+    { id: 7, username: 'Lebron James', displayName: 'Lebron J'},
+    { id: 8, username: 'Kevin Durant', displayName: 'Kevin D'},
+    { id: 9, username: 'Stephen Curry', displayName: 'Stephen C'},
+    { id: 10, username: 'Michael Jordan', displayName: 'Michael J'},
   ];
 
 
@@ -20,15 +26,13 @@ app.get('/api/users', (req, res) => {
   const {
     query: {filter, value},
   } = req;
-  // when filter and value are undefined return all users
-  if (!filter && !value) {
-    return res.send(dummyData);
-  }
+
   // when filter and value are defined
-  if (filter && value) {
-    const filteredUsers = dummyData.filter((user) => user[filter] === value);
-    return res.send(filteredUsers);
-  }
+  if (filter && value) 
+    return res.send(dummyData.filter((user) => user[filter].includes(value)));
+
+  return res.send(dummyData);
+
 });
 
 app.get("/api/products", (req, res) => {
