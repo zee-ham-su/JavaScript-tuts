@@ -36,11 +36,11 @@ app.get('/api/users/:id', (req, res) => {
   if (isNaN(parsedId)) {
     res.status(400).send({msg: 'Invalid ID supplied'});
   };
-  const findUser = dummyData.find(user => user.id === parsedId);
-  if (!findUser) {
-    res.status(404).send({msg: 'User not found'});
+  const findUser = dummyData.find((user) => user.id === parsedId);
+  if (!findUser)
+    return res.status(404).send({msg: 'User not found'});
     return res.send(findUser);
-  };
+
 });
 
 
