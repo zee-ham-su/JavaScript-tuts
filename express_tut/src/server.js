@@ -4,10 +4,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const dummyData = [
-    { id: 1, name: 'John Doe'},
-    { id: 2, name: 'Jane Doe'},
-    { id: 3, name: 'John Smith'},
-    { id: 4, name: 'Jane Smith'},
+    { id: 1, username: 'John Doe', displayName: 'John D'},
+    { id: 2, username: 'Jane Doe', displayName: 'Jane D'},
+    { id: 3, username: 'John Smith', displayName: 'John S'},
+    { id: 4, username: 'Jane Smith', displayName: 'Jane S'},
   ];
 
 
@@ -16,7 +16,19 @@ const dummyData = [
 });
 
 app.get('/api/users', (req, res) => {
-  res.send(dummyData);
+  console.log(req.query);
+  const {
+    query: {filter, value},
+  } = req;
+  // when filter and value are undefined return all users
+  if (!filter && !value) {
+    return res.send(dummyData);
+  }
+  // when filter and value are defined
+  if (filter && value) {
+    const filteredUsers = dummyData.filter((user) => user[filter] === value);
+    return res.send(filteredUsers);
+  }
 });
 
 app.get("/api/products", (req, res) => {
