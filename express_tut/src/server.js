@@ -37,14 +37,12 @@ app.get('/api/users', (req, res) => {
 
 });
 
-
 app.post('/api/users', (req, res) => {
   const { body } = req;
   const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
   dummyData.push(newUser);
   return res.status(201).send(newUser);
 });
-
 
 app.get("/api/products", (req, res) => {
   res.send([
@@ -54,7 +52,6 @@ app.get("/api/products", (req, res) => {
     { id: 4, name: 'desktop', price: 2500.75 },
   ]);
 });
-
 
 app.get('/api/users/:id', (req, res) => {
   console.log(req.params);
