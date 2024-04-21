@@ -68,7 +68,16 @@ app.get('/api/users/:id', (req, res) => {
 });
 
 app.put('/api/users/:id', (req, res) => {
+  const { 
+    body,
+    params: { id },
+  } = req;
   
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) {
+    return res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
 });
 
 app.listen(PORT, () => {
