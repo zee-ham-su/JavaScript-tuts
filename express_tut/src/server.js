@@ -85,7 +85,7 @@ app.put('/api/users/:id', (req, res) => {
   return res.sendStatus(204);
 });
 
-app.get('api/users/:id', (req, res) => {
+app.patch('api/users/:id', (req, res) => {
   const { 
     body,
     params: { id },
@@ -98,6 +98,7 @@ app.get('api/users/:id', (req, res) => {
   const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
   if (findUserIndex === -1)
     return res.status(404).send({msg: 'User not found'});
+  dummyData[findUserIndex] = { ...dummyData[findUserIndex], ...body };
 });
 
 app.listen(PORT, () => {
