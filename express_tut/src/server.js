@@ -67,6 +67,9 @@ app.get('/api/users/:id', (req, res) => {
 
 });
 
+app.put('/api/users/:id', (req, res) => {
+  
+});
 
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT)
