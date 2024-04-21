@@ -99,6 +99,7 @@ app.patch('api/users/:id', (req, res) => {
   if (findUserIndex === -1)
     return res.status(404).send({msg: 'User not found'});
   dummyData[findUserIndex] = { ...dummyData[findUserIndex], ...body };
+  return res.sendStatus(204);
 });
 
 app.listen(PORT, () => {
