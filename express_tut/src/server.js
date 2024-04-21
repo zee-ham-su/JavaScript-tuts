@@ -85,7 +85,7 @@ app.put('/api/users/:id', (req, res) => {
   return res.sendStatus(204);
 });
 
-app.patch('api/users/:id', (req, res) => {
+app.patch('/api/users/:id', (req, res) => {
   const { 
     body,
     params: { id },
