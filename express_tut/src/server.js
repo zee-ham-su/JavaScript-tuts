@@ -78,6 +78,10 @@ app.put('/api/users/:id', (req, res) => {
     return res.status(400).send({msg: 'Invalid ID supplied'});
   };
   const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1) {
+    return res.status(404).send({msg: 'User not found'});
+
+  dummyData[findUserIndex] = { id: parsedId, ...body };
 });
 
 app.listen(PORT, () => {
