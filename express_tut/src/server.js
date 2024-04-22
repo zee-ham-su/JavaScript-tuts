@@ -59,11 +59,13 @@ app.post(
   body('username')
     .notEmpty()
     .withMessage('username must not be empty')
-    .isLength({ min: 5, max: 10 })
-    .withMessage('username must be a string with length between 5 and 10')
+    .isLength({ min: 5, max: 32 })
+    .withMessage('username must be a string with length between 5 and 32')
     .isString()
     .withMessage('username must be a string'),
   (req, res) => {
+    const results = validationResult(req);
+    console.log(results);
     const { body } = req;
     const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
     dummyData.push(newUser);
