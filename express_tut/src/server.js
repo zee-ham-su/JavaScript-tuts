@@ -54,12 +54,21 @@ app.get(
 
   });
 
-app.post('/api/users', (req, res) => {
-  const { body } = req;
-  const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
-  dummyData.push(newUser);
-  return res.status(201).send(newUser);
-});
+app.post(
+  '/api/users',
+  body('username')
+    .notEmpty()
+    .withMessage('username must not be empty')
+    .isLength({ min: 5, max: 10 })
+    .withMessage('username must be a string with length between 5 and 10')
+    .isString()
+    .withMessage('username must be a string'),
+  (req, res) => {
+    const { body } = req;
+    const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
+    dummyData.push(newUser);
+    return res.status(201).send(newUser);
+  });
 
 app.get("/api/products", (req, res) => {
   res.send([
