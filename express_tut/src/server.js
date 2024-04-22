@@ -1,5 +1,6 @@
 import express from 'express';
-import { query, validationResult, body, matchedData } from 'express-validator';
+import { query, validationResult, body, matchedData, checkSchema } from 'express-validator';
+import{ UserValidationSchema } from './utils/validationSchema.js';
 
 const app = express();
 app.use(express.json());
@@ -55,15 +56,7 @@ app.get(
   });
 
 app.post(
-  '/api/users',
-  body('username')
-    .notEmpty()
-    .withMessage('username must not be empty')
-    .isLength({ min: 5, max: 32 })
-    .withMessage('username must be a string with length between 5 and 32')
-    .isString()
-    .withMessage('username must be a string'),
-  body('displayName').notEmpty().withMessage('displayName must not be empty'),
+  '/api/users', checkSchema(UserValidationSchema),
   (req, res) => {
     const results = validationResult(req);
     console.log(results);
