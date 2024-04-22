@@ -111,7 +111,7 @@ app.delete('/api/users/:id', (req, res) => {
   const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
   if (findUserIndex === -1)
     return res.status(404).send({msg: 'User not found'});
-  dummyData.splice(findUserIndex, 1);
+  dummyData.splice(findUserIndex);
   return res.sendStatus(204);
 });
 
