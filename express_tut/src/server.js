@@ -103,7 +103,9 @@ app.patch('/api/users/:id', (req, res) => {
 });
 
 app.delete('/api/users/:id', (req, res) => {
-  const { id } = req.params;
+  const {
+    params: { id },
+  } = req;
   const parsedId = parseInt(id);
   if (isNaN(parsedId)) {
     return res.status(400).send({msg: 'Invalid ID supplied'});
@@ -111,7 +113,7 @@ app.delete('/api/users/:id', (req, res) => {
   const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
   if (findUserIndex === -1)
     return res.status(404).send({msg: 'User not found'});
-  dummyData.splice(findUserIndex);
+  dummyData.splice(findUserIndex, 1);
   return res.sendStatus(204);
 });
 
