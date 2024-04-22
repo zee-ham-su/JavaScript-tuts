@@ -3,6 +3,13 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
+const loggingMiddleware = (req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+};
+
+app.use(loggingMiddleware);
+
 const PORT = process.env.PORT || 3000;
 
 const dummyData = [
@@ -19,7 +26,7 @@ const dummyData = [
   ];
 
 
-  app.get('/', (req, res) => {
+  app.get('/', loggingMiddleware, (req, res) => {
   res.status(201).send({msg: 'Hello World!'});
 });
 
