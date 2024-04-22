@@ -63,6 +63,7 @@ app.post(
     .withMessage('username must be a string with length between 5 and 32')
     .isString()
     .withMessage('username must be a string'),
+  body('displayName').notEmpty().withMessage('displayName must not be empty'),
   (req, res) => {
     const results = validationResult(req);
     console.log(results);
