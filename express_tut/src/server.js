@@ -102,6 +102,19 @@ app.patch('/api/users/:id', (req, res) => {
   return res.sendStatus(204);
 });
 
+app.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) {
+    return res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1)
+    return res.status(404).send({msg: 'User not found'});
+  dummyData.splice(findUserIndex, 1);
+  return res.sendStatus(204);
+});
+
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT)
 });
