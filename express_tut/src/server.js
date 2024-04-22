@@ -71,9 +71,7 @@ app.post(
       return res.status(400).send({ errors: results.array() });
     }
     const data = matchedData(req);
-    console.log(data); 
-    const { body } = req;
-    const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
+    const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...data };
     dummyData.push(newUser);
     return res.status(201).send(newUser);
   });
