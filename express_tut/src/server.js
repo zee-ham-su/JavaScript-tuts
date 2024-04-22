@@ -1,5 +1,5 @@
 import express from 'express';
-import { query } from 'express-validator';
+import { query, validationResult } from 'express-validator';
 
 const app = express();
 app.use(express.json());
@@ -33,9 +33,10 @@ const dummyData = [
 
 app.get(
   '/api/users',
-  query('filter').isString().notEmpty(),
+  query('filter').isString().notEmpty().isLength({ min: 3, max: 10 }).withMessage('filter must be a string with length between 3 and 10'),
   (req, res) => {
-    console.log(req.query);
+    const results = validationResult(req);
+    console.log(results);
     const {
       query: {filter, value},
     } = req;
