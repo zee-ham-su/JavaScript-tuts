@@ -1,4 +1,5 @@
 import express from 'express';
+import { query } from 'express-validator';
 
 const app = express();
 app.use(express.json());
@@ -30,19 +31,22 @@ const dummyData = [
   res.status(201).send({msg: 'Hello World!'});
 });
 
-app.get('/api/users', (req, res) => {
-  console.log(req.query);
-  const {
-    query: {filter, value},
-  } = req;
+app.get(
+  '/api/users',
+  query('filter').isString().notEmpty(),
+  (req, res) => {
+    console.log(req.query);
+    const {
+      query: {filter, value},
+    } = req;
 
   // when filter and value are defined
-  if (filter && value) 
-    return res.send(dummyData.filter((user) => user[filter].includes(value)));
+    if (filter && value) 
+      return res.send(dummyData.filter((user) => user[filter].includes(value)));
 
-  return res.send(dummyData);
+    return res.send(dummyData);
 
-});
+  });
 
 app.post('/api/users', (req, res) => {
   const { body } = req;
