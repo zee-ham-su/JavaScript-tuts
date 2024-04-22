@@ -67,6 +67,9 @@ app.post(
   (req, res) => {
     const results = validationResult(req);
     console.log(results);
+    if (!results.isEmpty()) {
+      return res.status(400).send(results);
+    } 
     const { body } = req;
     const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...body };
     dummyData.push(newUser);
