@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { query, validationResult } from "express-validator";
+import { dummyData } from '../utils/data.js';
 
 const router = Router();
 
