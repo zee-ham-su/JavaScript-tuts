@@ -21,22 +21,8 @@ const PORT = process.env.PORT || 3000;
 
   app.get('/', loggingMiddleware, (req, res) => {
   res.status(201).send({msg: 'Hello World!'});
+
 });
-
-
-app.post(
-  '/api/users', checkSchema(UserValidationSchema),
-  (req, res) => {
-    const results = validationResult(req);
-    console.log(results);
-    if (!results.isEmpty()) {
-      return res.status(400).send({ errors: results.array() });
-    }
-    const data = matchedData(req);
-    const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...data };
-    dummyData.push(newUser);
-    return res.status(201).send(newUser);
-  });
 
 app.get("/api/products", (req, res) => {
   res.send([
