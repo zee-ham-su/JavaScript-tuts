@@ -2,6 +2,7 @@ import express from 'express';
 import { query, validationResult, body, matchedData, checkSchema } from 'express-validator';
 import{ UserValidationSchema } from './utils/validationSchema.js';
 import usersRouter from './routes/users.js';
+import { dummyData } from './utils/data.js';
 
 const app = express();
 app.use(express.json());
@@ -16,18 +17,6 @@ app.use(loggingMiddleware);
 
 const PORT = process.env.PORT || 3000;
 
-const dummyData = [
-    { id: 1, username: 'John Doe', displayName: 'John D'},
-    { id: 2, username: 'Jane Doe', displayName: 'Jane D'},
-    { id: 3, username: 'John Smith', displayName: 'John S'},
-    { id: 4, username: 'Jane Smith', displayName: 'Jane S'},
-    { id: 5, username: 'Sufian Hamza', displayName: 'Sufian H'},
-    { id: 6, username: 'Kobe Bryant', displayName: 'Kobe B'},
-    { id: 7, username: 'Lebron James', displayName: 'Lebron J'},
-    { id: 8, username: 'Kevin Durant', displayName: 'Kevin D'},
-    { id: 9, username: 'Stephen Curry', displayName: 'Stephen C'},
-    { id: 10, username: 'Michael Jordan', displayName: 'Michael J'},
-  ];
 
 
   app.get('/', loggingMiddleware, (req, res) => {
