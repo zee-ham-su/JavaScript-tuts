@@ -5,18 +5,9 @@ const app = express();
 app.use(express.json());
 app.use(usersRouter);
 
-const loggingMiddleware = (req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-};
-
-app.use(loggingMiddleware);
-
 const PORT = process.env.PORT || 3000;
 
-
-
-  app.get('/', loggingMiddleware, (req, res) => {
+  app.get('/', (req, res) => {
   res.status(201).send({msg: 'Hello World!'});
 
 });
