@@ -2,6 +2,7 @@ import { Router } from "express";
 import { query, validationResult, checkSchema, body, matchedData } from "express-validator";
 import{ UserValidationSchema } from '../utils/validationSchema.js';
 import { dummyData } from '../utils/data.js';
+import { resolveIndexByUserId  } from '../utils/middlewares.js'
 
 const router = Router();
 
@@ -43,15 +44,11 @@ router.post(
     return res.status(201).send(newUser);
   });
 
-router.get('/api/users/:id', (req, res) => {
-  console.log(req.params);
-  const parsedId = parseInt(req.params.id);
-  console.log(parsedId);
-  if (isNaN(parsedId)) {
-    res.status(400).send({msg: 'Invalid ID supplied'});
-  };
-  const findUser = dummyData.find((user) => user.id === parsedId);
-  if (!findUser)
+router.get('/api/users/:id', resolveIndexByUserId, (req, res) => {
+  
+  const { findUserIndex } = req;
+  const findUser = dummyData[findUserIndex];
+  if (!findUser) 
     return res.status(404).send({msg: 'User not found'});
     return res.send(findUser);
 
