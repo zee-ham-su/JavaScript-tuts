@@ -45,7 +45,6 @@ router.post(
   });
 
 router.get('/api/users/:id', resolveIndexByUserId, (req, res) => {
-  
   const { findUserIndex } = req;
   const findUser = dummyData[findUserIndex];
   if (!findUser) 
@@ -54,55 +53,22 @@ router.get('/api/users/:id', resolveIndexByUserId, (req, res) => {
 
 });
 
-router.put('/api/users/:id', (req, res) => {
-  const { 
-    body,
-    params: { id },
-  } = req;
-  
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) {
-    return res.status(400).send({msg: 'Invalid ID supplied'});
-  };
-  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
-  if (findUserIndex === -1)
-    return res.status(404).send({msg: 'User not found'});
-
-  dummyData[findUserIndex] = { id: parsedId, ...body };
-  return res.sendStatus(204);
+router.put("/api/users/:id", resolveIndexByUserId, (request, response) => {
+	const { body, findUserIndex } = request;
+	dummyData[findUserIndex] = { id: dummyData[findUserIndex].id, ...body };
+	return response.sendStatus(200);
 });
 
-router.patch('/api/users/:id', (req, res) => {
-  const { 
-    body,
-    params: { id },
-  } = req;
-  
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) {
-    return res.status(400).send({msg: 'Invalid ID supplied'});
-  };
-  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
-  if (findUserIndex === -1)
-    return res.status(404).send({msg: 'User not found'});
-  dummyData[findUserIndex] = { ...dummyData[findUserIndex], ...body };
-  return res.sendStatus(204);
+router.patch("/api/users/:id", resolveIndexByUserId, (request, response) => {
+	const { body, findUserIndex } = request;
+	dummyData[findUserIndex] = { ...dummyData[findUserIndex], ...body };
+	return response.sendStatus(200);
 });
 
-
-router.delete('/api/users/:id', (req, res) => {
-  const {
-    params: { id },
-  } = req;
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) {
-    return res.status(400).send({msg: 'Invalid ID supplied'});
-  };
-  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
-  if (findUserIndex === -1)
-    return res.status(404).send({msg: 'User not found'});
-  dummyData.splice(findUserIndex, 1);
-  return res.sendStatus(204);
+router.delete("/api/users/:id", resolveIndexByUserId, (request, response) => {
+	const { findUserIndex } = request;
+	dummyData.splice(findUserIndex, 1);
+	return response.sendStatus(200);
 });
 
 
