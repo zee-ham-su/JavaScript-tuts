@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { query, validationResult, checkSchema } from "express-validator";
+import { query, validationResult, checkSchema, body, matchedData } from "express-validator";
 import{ UserValidationSchema } from '../utils/validationSchema.js';
 import { dummyData } from '../utils/data.js';
 
 const router = Router();
+
 
 router.get('/api/users',
   query('filter')
@@ -41,5 +42,71 @@ router.post(
     dummyData.push(newUser);
     return res.status(201).send(newUser);
   });
+
+router.get('/api/users/:id', (req, res) => {
+  console.log(req.params);
+  const parsedId = parseInt(req.params.id);
+  console.log(parsedId);
+  if (isNaN(parsedId)) {
+    res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUser = dummyData.find((user) => user.id === parsedId);
+  if (!findUser)
+    return res.status(404).send({msg: 'User not found'});
+    return res.send(findUser);
+
+});
+
+router.put('/api/users/:id', (req, res) => {
+  const { 
+    body,
+    params: { id },
+  } = req;
+  
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) {
+    return res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1)
+    return res.status(404).send({msg: 'User not found'});
+
+  dummyData[findUserIndex] = { id: parsedId, ...body };
+  return res.sendStatus(204);
+});
+
+router.patch('/api/users/:id', (req, res) => {
+  const { 
+    body,
+    params: { id },
+  } = req;
+  
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) {
+    return res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1)
+    return res.status(404).send({msg: 'User not found'});
+  dummyData[findUserIndex] = { ...dummyData[findUserIndex], ...body };
+  return res.sendStatus(204);
+});
+
+
+router.delete('/api/users/:id', (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) {
+    return res.status(400).send({msg: 'Invalid ID supplied'});
+  };
+  const findUserIndex = dummyData.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1)
+    return res.status(404).send({msg: 'User not found'});
+  dummyData.splice(findUserIndex, 1);
+  return res.sendStatus(204);
+});
+
 
 export default router;
