@@ -1,8 +1,8 @@
-import { router } from 'express';
+import { Router } from 'express';
 
-const productRouter = router();
+const productRouter = Router();
 
-router.get("/api/products", (req, res) => {
+productRouter.get("/api/products", (req, res) => {
   res.send([
     { id: 1, name: 'phone', price: 1000.00 },
     { id: 2, name: 'laptop', price: 2000.99 },
