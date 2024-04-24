@@ -9,6 +9,7 @@ productRouter.get("/api/products", (req, res) => {
     { id: 3, name: 'tablet', price: 1500.50 },
     { id: 4, name: 'desktop', price: 2500.75 },
   ]);
+  console.log('products');
 });
 
 
