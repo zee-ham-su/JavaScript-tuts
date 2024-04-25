@@ -5,8 +5,8 @@ const productRouter = Router();
 productRouter.get("/api/products", (req, res) => {
   console.log(req.headers.cookie);
   console.log(req.cookies);
-  console.log(req.signedCookies);
-  if (req.cookies.hello && req.cookies.hello === 'world') {
+  console.log(req.signedCookies.hello);
+  if (req.signedCookies.hello && req.signedCookies.hello === 'world') {
     res.send([
       { id: 1, name: 'phone', price: 1000.00 },
       { id: 2, name: 'laptop', price: 2000.99 },
