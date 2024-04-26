@@ -23,6 +23,7 @@ const PORT = process.env.PORT || 3000;
   app.get('/', (req, res) => {
     console.log(req.session);
     console.log(req.sessionID);
+    req.session.visited = true;
     res.cookie('hello', 'world', {
       maxAge: 60000 * 60 * 24,
       signed: true,

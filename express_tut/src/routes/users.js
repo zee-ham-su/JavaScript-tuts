@@ -15,6 +15,8 @@ router.get('/api/users',
     .isLength({ min: 3, max: 10 })
     .withMessage('filter must be a string with length between 3 and 10'),
   (req, res) => {
+    console.log(req.session);
+    console.log(req.session.id);
     const results = validationResult(req);
     console.log(results);
     const {
