@@ -11,6 +11,9 @@ app.use(session({
   secret: 'sufian hamza',
   saveUninitialized: false,
   resave: false,
+  cookie: {
+    maxAge: 60000 * 60 * 24,
+  },
 }))
 app.use(routes);
 
@@ -18,6 +21,8 @@ app.use(routes);
 const PORT = process.env.PORT || 3000;
 
   app.get('/', (req, res) => {
+    console.log(req.session);
+    console.log(req.sessionID);
     res.cookie('hello', 'world', {
       maxAge: 60000 * 60 * 24,
       signed: true,
