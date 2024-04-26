@@ -10,6 +10,7 @@ app.use(cookieParser("helloworld"));
 app.use(session({
   secret: 'sufian hamza',
   saveUninitialized: false,
+  resave: false,
 }))
 app.use(routes);
 
