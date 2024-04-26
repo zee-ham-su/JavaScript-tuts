@@ -1,11 +1,13 @@
 import express from 'express';
 import routes from './routes/index.js';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser("helloworld"));
+app.use(session())
 app.use(routes);
 
 
