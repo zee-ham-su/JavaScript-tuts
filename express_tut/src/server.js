@@ -7,7 +7,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser("helloworld"));
-app.use(session())
+app.use(session({
+  secret: 'sufian hamza',
+  saveUninitialized: false,
+}))
 app.use(routes);
 
 
