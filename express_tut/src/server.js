@@ -32,6 +32,12 @@ const PORT = process.env.PORT || 3000;
 
 });
 
+app.post('/api/auth', (req, res) => {
+  const { body } = req;
+  
+
+});
+
 
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT)

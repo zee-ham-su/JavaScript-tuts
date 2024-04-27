@@ -1,14 +1,9 @@
 export const dummyData = [
-    { id: 1, username: 'John Doe', displayName: 'John D'},
-    { id: 2, username: 'Jane Doe', displayName: 'Jane D'},
-    { id: 3, username: 'John Smith', displayName: 'John S'},
-    { id: 4, username: 'Jane Smith', displayName: 'Jane S'},
-    { id: 5, username: 'Sufian Hamza', displayName: 'Sufian H'},
-    { id: 6, username: 'Kobe Bryant', displayName: 'Kobe B'},
-    { id: 7, username: 'Lebron James', displayName: 'Lebron J'},
-    { id: 8, username: 'Kevin Durant', displayName: 'Kevin D'},
-    { id: 9, username: 'Stephen Curry', displayName: 'Stephen C'},
-    { id: 10, username: 'Michael Jordan', displayName: 'Michael J'},
-  ];
-
-  
+	{ id: 1, username: "anson", displayName: "Anson", password: "hello123" },
+	{ id: 2, username: "jack", displayName: "Jack", password: "hello124" },
+	{ id: 3, username: "adam", displayName: "Adam", password: "hellohello" },
+	{ id: 4, username: "tina", displayName: "Tina", password: "test123" },
+	{ id: 5, username: "jason", displayName: "Jason", password: "hello123" },
+	{ id: 6, username: "henry", displayName: "Henry", password: "hello123" },
+	{ id: 7, username: "marilyn", displayName: "Marilyn", password: "hello123" },
+];
