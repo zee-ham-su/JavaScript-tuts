@@ -37,7 +37,7 @@ app.post('/api/auth', (req, res) => {
   const { username, password } = req.body;
   const findUser = dummyData.find((user) => user.username === username);
   if (!findUser) {
-    return res.status(404).send({ msg: 'User not found' });
+    return res.status(401).send({ msg: 'User not found' });
   }
   if (findUser.password !== password) {
     return res.status(401).send({ msg: 'Password is incorrect' });
