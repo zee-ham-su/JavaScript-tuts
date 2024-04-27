@@ -2,6 +2,7 @@ import express from 'express';
 import routes from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { dummyData } from './utils/data.js';
 
 const app = express();
 
@@ -33,9 +34,11 @@ const PORT = process.env.PORT || 3000;
 });
 
 app.post('/api/auth', (req, res) => {
-  const { body } = req;
-  
-
+  const { username, password } = req.body;
+  const findUser = dummyData.find((user) => user.username === username);
+  if (!findUser) {
+    return res.status(404).send({ msg: 'User not found' });
+  }
 });
 
 
