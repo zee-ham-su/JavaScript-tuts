@@ -17,6 +17,9 @@ app.use(session({
     maxAge: 60000 * 60 * 24,
   },
 }))
+app,use(passport.initialize())
+app.use(passport.session())
+
 app.use(routes);
 
 
