@@ -3,6 +3,7 @@ import routes from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { dummyData } from './utils/data.js';
+import passport from 'passport';
 
 const app = express();
 
