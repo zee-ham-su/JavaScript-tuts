@@ -7,8 +7,10 @@ passport.use(
         try {
             const findUser = dummyData.find((user) => user.username === username);
             if (!findUser) throw new Error('User not found')
+            if (findUser.password!== password) throw new Error('Password is incorrect')
+            done(null, findUser);
         } catch (error) {
-            return done(error);
+            done(err, null);
         }
     })
 );
