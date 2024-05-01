@@ -46,6 +46,13 @@ app.post('/api/auth', (req, res) => {
   return res.status(200).send(findUser);
 });
 
+app.get('/api/auth/status', (req, res) => {
+  if (req.session.user) {
+    return res.status(200).send(req.session.user);
+  }
+  return res.status(401).send({ msg: 'User not logged in' });
+}); 
+
 
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT)
