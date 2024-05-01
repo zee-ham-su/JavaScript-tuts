@@ -21,9 +21,9 @@ passport.deserializeUser((id, done) => {
     });
 
 export default passport.use(
-    new Strategy({ usernameField: "email" },(username, password, done) => {
-        console.log('Username: ${email}');
-        console.log('Password: ${password}');
+    new Strategy((username, password, done) => {
+        console.log(username);
+        console.log(password);
         try {
             const findUser = dummyData.find((user) => user.username === username);
             if (!findUser) throw new Error('User not found')
