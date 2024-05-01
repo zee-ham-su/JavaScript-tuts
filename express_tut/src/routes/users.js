@@ -91,25 +91,5 @@ router.get('/', (req, res) => {
 
 });
 
-router.post('/api/auth', (req, res) => {
-  const { username, password } = req.body;
-  const findUser = dummyData.find((user) => user.username === username);
-  if (!findUser) {
-    return res.status(401).send({ msg: 'User not found' });
-  }
-  if (findUser.password !== password) {
-    return res.status(401).send({ msg: 'Password is incorrect' });
-  }
-  req.session.user = findUser;
-  return res.status(200).send(findUser);
-});
-
-router.get('/api/auth/status', (req, res) => {
-  if (req.session.user) {
-    return res.status(200).send(req.session.user);
-  }
-  return res.status(401).send({ msg: 'User not logged in' });
-}); 
-
 
 export default router;
