@@ -42,7 +42,8 @@ app.post('/api/auth', (req, res) => {
   if (findUser.password !== password) {
     return res.status(401).send({ msg: 'Password is incorrect' });
   }
-  req.session.user = findUser
+  req.session.user = findUser;
+  return res.status(200).send(findUser);
 });
 
 
