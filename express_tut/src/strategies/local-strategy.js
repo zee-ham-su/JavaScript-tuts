@@ -3,10 +3,14 @@ import {Strategy} from "passport-local";
 import { dummyData } from "../utils/data.js";
 
 passport.serializeUser((user, done) => {
+    console.log('inside serializeUser')
+    console.log(user);
     done(null, user.id);
 }); 
 
 passport.deserializeUser((id, done) => {
+    console.log('inside deserializeUser')
+    console.log(id);
     try {
         const findUser = dummyData.find((user) => user.id === id);
         if (!findUser) throw new Error('User not found')
