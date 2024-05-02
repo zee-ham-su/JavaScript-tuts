@@ -33,6 +33,8 @@ app.post(
 app.get('/api/auth/status', (req, res) => {
   console.log('inside /auth/status endpoint');
   console.log(req.user);
+  if (req.user) return res.sendStatus(req.user);
+  return res.sendStatus(401);
 });
 
 const PORT = process.env.PORT || 3000;
