@@ -33,6 +33,7 @@ app.post(
 app.get('/api/auth/status', (req, res) => {
   console.log('inside /auth/status endpoint');
   console.log(req.user);
+  console.log(req.session);
   return req.user ? res.send(req.user) : res.sendStatus
   (401);
 });
