@@ -31,6 +31,7 @@ app.post(
   });
 
 app.get('/api/auth/status', (req, res) => {
+  console.log('inside /auth/status endpoint');
   console.log(req.user);
 });
 
