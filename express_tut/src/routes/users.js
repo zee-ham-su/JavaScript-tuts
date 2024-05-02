@@ -3,7 +3,7 @@ import { query, validationResult, checkSchema, body, matchedData } from "express
 import{ UserValidationSchema } from '../utils/validationSchema.js';
 import { dummyData } from '../utils/data.js';
 import { resolveIndexByUserId  } from '../utils/middlewares.js'
-
+import { User } from '../mongoose/schemas/user.js'
 const router = Router();
 
 
@@ -39,18 +39,16 @@ router.get('/api/users',
 
 
 router.post(
-  '/api/users', checkSchema(UserValidationSchema),
-  (req, res) => {
-    const results = validationResult(req);
-    console.log(results);
-    if (!results.isEmpty()) {
-      return res.status(400).send({ errors: results.array() });
-    }
-    const data = matchedData(req);
-    const newUser = { id: dummyData[dummyData.length - 1].id + 1, ...data };
-    dummyData.push(newUser);
-    return res.status(201).send(newUser);
-  });
+  '/api/users', async (req, res) => {
+    const { body } = req;
+    const newUser = new User(body);
+    try {
+      const result = await newUser.save();
+      res.status(201).json(result);
+    } catch (error) {
+      res.status(400).json(error);
+    } 
+    });
 
 router.get('/api/users/:id', resolveIndexByUserId, (req, res) => {
   const { findUserIndex } = req;
