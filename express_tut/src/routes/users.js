@@ -39,7 +39,7 @@ router.get('/api/users',
 
 
 router.post(
-  '/api/users', async (req, res) => {
+  '/api/users', checkSchema(UserValidationSchema), async (req, res) => {
     const { body } = req;
     const newUser = new User(body);
     try {
